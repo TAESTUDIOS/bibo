@@ -1,0 +1,70 @@
+{
+  "items": [
+    {
+      "id": "appt_uxt1eni",
+      "title": "test",
+      "date": "2025-09-16",
+      "start": "09:00",
+      "durationMin": 30
+    },
+    {
+      "id": "appt_2x7qa9v",
+      "title": "dfhdfhdf",
+      "date": "2025-09-25",
+      "start": "09:00",
+      "durationMin": 30
+    },
+    {
+      "id": "appt_h3jcgr6",
+      "title": "sfdh",
+      "date": "2025-09-25",
+      "start": "09:00",
+      "durationMin": 30
+    },
+    {
+      "id": "appt_t00nj4y",
+      "title": "dfhdfh",
+      "date": "2025-09-20",
+      "start": "09:00",
+      "durationMin": 30,
+      "notes": "dfhdfh"
+    },
+    {
+      "id": "appt_2gwrphn",
+      "title": "test",
+      "date": "2025-09-21",
+      "start": "10:00",
+      "durationMin": 30,
+      "notes": "test"
+    },
+    {
+      "id": "appt_lrbn3bl",
+      "title": "clean car",
+      "date": "2025-09-21",
+      "start": "14:05",
+      "durationMin": 100,
+      "notes": "with soap"
+    },
+    {
+      "id": "appt_lowgahl",
+      "title": "BuurtzorgT",
+      "date": "2025-09-22",
+      "start": "10:00",
+      "durationMin": 30
+    },
+    {
+      "id": "appt_iyvzp66",
+      "title": "test1",
+      "date": "2025-09-23",
+      "start": "09:00",
+      "durationMin": 30
+    },
+    {
+      "id": "appt_q3uexhr",
+      "title": "test2",
+      "date": "2025-09-23",
+      "start": "09:30",
+      "durationMin": 30
+    }
+  ]
+}

@@ -1,0 +1,174 @@
+/* styles/globals.css */
+/* Global styles and Tailwind layers for the PSA */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #ffffff;
+  --fg: #111827;
+  --header-h: 56px; /* mobile header height */
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+a {
+  text-underline-offset: 2px;
+}
+
+/* Small polish: focus ring and fade-in animation */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fade-in 180ms ease-out;
+}
+
+@keyframes chuckle-bounce {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateY(-2px) rotate(-5deg) scale(1.02);
+  }
+  50% {
+    transform: translateY(1px) rotate(4deg) scale(0.99);
+  }
+  75% {
+    transform: translateY(-1px) rotate(-3deg) scale(1.01);
+  }
+}
+
+.chuckle-motion {
+  animation: chuckle-bounce 1800ms ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes wave-hello {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(14deg);
+  }
+  40% {
+    transform: rotate(-10deg);
+  }
+  60% {
+    transform: rotate(12deg);
+  }
+  80% {
+    transform: rotate(-6deg);
+  }
+}
+
+.wave-motion {
+  animation: wave-hello 1600ms ease-in-out infinite;
+  transform-origin: 75% 75%;
+}
+
+@keyframes sleepy-zzz {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) translateX(4px) scale(0.85) rotate(-6deg);
+  }
+  20% {
+    opacity: 0.95;
+  }
+  60% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-26px) translateX(-6px) scale(1.08) rotate(5deg);
+  }
+}
+
+.sleepy-z {
+  animation: sleepy-zzz 2000ms ease-in-out infinite;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 10px rgba(48, 108, 220, 0.4);
+}
+
+/* Hide scrollbars on mobile nav scrollers */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Smooth touch scrolling */
+.touch-scroll { -webkit-overflow-scrolling: touch; }
+
+/* Respect iOS home indicator safe area */
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+
+/* Global dark defaults for form controls (fallback for unstyled elements) */
+.dark input,
+.dark select,
+.dark textarea {
+  background-color: #111213; /* align with --surface-1 */
+  color: #e5e7eb; /* light grey */
+  border-color: rgba(255,255,255,0.08); /* var(--border) */
+}
+.dark button {
+  border-color: rgba(255,255,255,0.08);
+}
+
+/* Graphite theme tokens (light/dark) */
+:root {
+  /* Very dark neutral greys (no blue tint) */
+  --surface-0: #0b0b0c; /* app background */
+  --surface-1: #111213; /* elevated surfaces */
+  --surface-2: #171819; /* higher elevation */
+  --border: rgba(255,255,255,0.08);
+  --fg: #e5e7eb; /* text (light grey/white) */
+  --muted: #a1a1aa; /* muted text (zinc-400) */
+  --accent: #f59e0b; /* orange-500 */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: var(--surface-0);
+  }
+}
+
+.dark {
+  --bg: var(--surface-0);
+}
+
+::selection {
+  background: rgba(245, 158, 11, 0.28); /* orange/30 */
+  color: #ffffff;
+}
+
+/* Subtle scrollbars on desktop */
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 8px; border: 2px solid transparent; background-clip: padding-box; }
+*::-webkit-scrollbar-track { background: transparent; }
+
+/* Modern font + typography polish */
+html, body {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  letter-spacing: 0.01em;
+  line-height: 1.55;
+}
+
+/* Accent link color */
+a { color: var(--accent); }
+a:hover { color: #fbbf24; /* orange-400 on hover */ }
