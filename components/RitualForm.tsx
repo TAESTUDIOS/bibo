@@ -3,7 +3,7 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useAppStore } from "@/lib/store";
 import type { RitualConfig } from "@/lib/types";
 import { uid } from "@/lib/id";
@@ -15,6 +15,15 @@ type Props = {
   onDone?: () => void;
 };
 
+const repeatOptions = ["daily", "weekly", "monthly", "none"] as const;
+type RepeatOption = (typeof repeatOptions)[number];
+
+const isRepeatOption = (value: string | undefined): value is RepeatOption =>
+  value !== undefined && (repeatOptions as readonly string[]).includes(value);
+
+const toRepeatOption = (value?: string): RepeatOption =>
+  isRepeatOption(value) ? value : "daily";
+
 export default function RitualForm({ editId, onDone }: Props) {
   const { rituals, addRitual, updateRitual } = useAppStore();
   const editing = rituals.find((r) => r.id === editId);
@@ -22,9 +31,7 @@ export default function RitualForm({ editId, onDone }: Props) {
   const [webhook, setWebhook] = useState(editing?.webhook ?? "");
   const [type, setType] = useState<RitualConfig["trigger"]["type"]>(editing?.trigger.type ?? "schedule");
   const [time, setTime] = useState<string>(editing?.trigger.time ?? "08:00");
-  const [repeat, setRepeat] = useState<"daily" | "weekly" | "monthly" | "none">(
-    (editing?.trigger.repeat as any) ?? "daily"
-  );
+  const [repeat, setRepeat] = useState<RepeatOption>(toRepeatOption(editing?.trigger.repeat));
   const [chatKeyword, setChatKeyword] = useState(editing?.trigger.chatKeyword ?? "/start <id>");
   const [buttons, setButtons] = useState((editing?.buttons ?? ["Done","Snooze"]).join(","));
   const [error, setError] = useState<string | null>(null);
@@ -35,7 +42,7 @@ export default function RitualForm({ editId, onDone }: Props) {
     setWebhook(editing.webhook);
     setType(editing.trigger.type);
     setTime(editing.trigger.time ?? "08:00");
-    setRepeat(editing.trigger.repeat ?? "daily");
+    setRepeat(toRepeatOption(editing.trigger.repeat));
     setChatKeyword(editing.trigger.chatKeyword ?? "/start <id>");
     setButtons((editing.buttons ?? []).join(","));
   }, [editId]);
@@ -87,11 +94,18 @@ export default function RitualForm({ editId, onDone }: Props) {
             </label>
             <label className="flex items-center gap-2 text-sm">
               <span>Repeat</span>
-              <select className="border rounded px-2 py-1 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-700" value={repeat} onChange={(e) => setRepeat(e.target.value)}>
-                <option value="daily">daily</option>
-                <option value="weekly">weekly</option>
-                <option value="monthly">monthly</option>
-                <option value="none">none</option>
+              <select
+                className="border rounded px-2 py-1 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-700"
+                value={repeat}
+                onChange={(event: ChangeEvent<HTMLSelectElement>) => {
+                  setRepeat(toRepeatOption(event.target.value));
+                }}
+              >
+                {repeatOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
               </select>
             </label>
           </>
